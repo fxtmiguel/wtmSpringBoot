@@ -1,17 +1,11 @@
 package com.wtm.spring_boot_wtm.controller;
 
 import com.wtm.spring_boot_wtm.model.User;
+import com.wtm.spring_boot_wtm.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-import com.wtm.spring_boot_wtm.service.*;
-import org.springframework.web.bind.annotation.PostMapping;
-
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("api/user")
@@ -20,19 +14,29 @@ public class UserController {
     @Autowired
     private IUserService userService;
 
+    // Register new user
     @PostMapping
     public ResponseEntity<?> saveUser(@RequestBody User user){
         System.out.println(user.toString());
         if (userService.findByUsername(user.getUsername()) != null){
-            return new ResponseEntity<>(HttpStatus.CONFLICT);
+            return new ResponseEntity<>(HttpStatus.CONFLICT); // Username already exists
         }
-        return new ResponseEntity<>(userService.saveUser(user), HttpStatus.CREATED);
+        return new ResponseEntity<>(userService.saveUser(user), HttpStatus.CREATED); // User saved
     }
 
-    @GetMapping
-    public ResponseEntity<?> getAllUsers(){
-        return ResponseEntity.ok(userService.findAll());
-    }   
+    // Login
+    @PostMapping("/login")
+    public ResponseEntity<?> login(@RequestBody User user) {
+        User existingUser = userService.findByUsername(user.getUsername());
+        if (existingUser == null) {
+            return new ResponseEntity<>("User not found", HttpStatus.NOT_FOUND);
+        }
 
-
+        // Compare password (in plain text for now)
+        if (existingUser.getPassword().equals(user.getPassword())) {
+            return new ResponseEntity<>("Login successful", HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>("Invalid credentials", HttpStatus.UNAUTHORIZED);
+        }
+    }
 }

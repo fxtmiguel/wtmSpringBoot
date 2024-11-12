@@ -5,11 +5,13 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.wtm.spring_boot_wtm.repository.*;
-import com.wtm.spring_boot_wtm.model.*;
+
+import com.wtm.spring_boot_wtm.repository.IUserRepository;
+import com.wtm.spring_boot_wtm.model.User;
 
 @Service
 public class UserService implements IUserService {
+
     @Autowired
     private IUserRepository userRepository;
 
@@ -25,11 +27,7 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public List<User> findAll(){
+    public List<User> findAll() {
         return userRepository.findAll();
     }
-
-
 }
-
-

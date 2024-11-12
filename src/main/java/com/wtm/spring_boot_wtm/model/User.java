@@ -26,6 +26,10 @@ public class User {
     @Column(name = "username", unique = true)
     private String username;
 
+    public String getUsername() {
+        return username;
+    }
+
     @Column(name = "email", unique = true)
     private String email;
 
@@ -37,5 +41,9 @@ public class User {
 
     @Column(name = "create_time")
     private LocalDateTime createTime;
+    
+    public void setCreateTime(LocalDateTime createTime) {
+        this.createTime = createTime;
+    }
 
 }

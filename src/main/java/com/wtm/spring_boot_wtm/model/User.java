@@ -9,8 +9,10 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
-@Data
+
+
 @Entity
+@Data
 @Table(name="users")
 public class User {
 
@@ -18,8 +20,15 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "name")
-    private String name;
+    public Long getId() {
+        return id;
+    }
+  
+    @Column(name = "firstname")
+    private String firstname;
+
+    @Column(name = "lastname")
+    private String lastname;
 
     @Column(name = "email", unique = true)
     private String email;
@@ -27,12 +36,24 @@ public class User {
     @Column(name = "username", unique = true)
     private String username;
 
-    @Column(name = "password")
-    private String password; // Note: Password should be stored in plain text for now
+    public String getUsername() {
+        return username;
+    }
 
-    @Column(name = "age")
-    private Integer age;
+   @Column(name = "password", unique = true)
+   private String password;
+
+   public String getPassword() {
+    return password;
+    }
+
+   @Column(name = "age")
+   private Integer age;
 
     @Column(name = "create_time")
     private LocalDateTime createTime;
+    
+    public void setCreateTime(LocalDateTime createTime) {
+        this.createTime = createTime;
+    }
 }

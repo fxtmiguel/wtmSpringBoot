@@ -43,7 +43,7 @@ public class UserController {
         }
     }
 
-    @PostMapping("/register")
+    /*@PostMapping("/register")
     public ResponseEntity<String> registerUser(@RequestBody User user) {
         userService.saveUser(user);  // Implement saveUser in UserService
         return new ResponseEntity<>("User registered successfully!", HttpStatus.CREATED);
@@ -56,5 +56,5 @@ public class UserController {
         } else {
             return new ResponseEntity<>(new ResponseMessage("Invalid credentials"), HttpStatus.UNAUTHORIZED);
         }
-    }
+    }*/
 }

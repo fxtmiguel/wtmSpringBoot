@@ -47,5 +47,14 @@ public class UserController {
     public ResponseEntity<String> registerUser(@RequestBody User user) {
         userService.saveUser(user);  // Implement saveUser in UserService
         return new ResponseEntity<>("User registered successfully!", HttpStatus.CREATED);
+
+
+        // Compare password (in plain text for now)
+        if (existingUser.getPassword().equals(user.getPassword())) {
+            // Return user details without the token
+            return new ResponseEntity<>(new LoginResponse(existingUser.getId(), existingUser.getUsername()), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(new ResponseMessage("Invalid credentials"), HttpStatus.UNAUTHORIZED);
+        }
     }
 }

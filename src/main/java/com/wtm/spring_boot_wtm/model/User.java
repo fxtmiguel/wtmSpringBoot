@@ -1,4 +1,5 @@
 package com.wtm.spring_boot_wtm.model;
+
 import lombok.Data;
 import java.time.LocalDateTime;
 import jakarta.persistence.GeneratedValue;
@@ -22,7 +23,7 @@ public class User {
     public Long getId() {
         return id;
     }
-
+  
     @Column(name = "firstname")
     private String firstname;
 
@@ -55,5 +56,4 @@ public class User {
     public void setCreateTime(LocalDateTime createTime) {
         this.createTime = createTime;
     }
-
 }

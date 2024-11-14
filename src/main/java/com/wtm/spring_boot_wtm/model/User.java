@@ -33,6 +33,7 @@ public class User {
     @Column(name = "email", unique = true)
     private String email;
 
+
     @Column(name = "username", unique = true)
     private String username;
 
@@ -56,4 +57,7 @@ public class User {
     public void setCreateTime(LocalDateTime createTime) {
         this.createTime = createTime;
     }
+
+
+
 }

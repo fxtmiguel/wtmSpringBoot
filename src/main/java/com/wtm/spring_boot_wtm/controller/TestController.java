@@ -8,11 +8,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/test")
-@CrossOrigin(origins = "http://192.168.1.110:19000")
+@CrossOrigin(origins = "http://192.168.3.189:8080")
 public class TestController {
 
     // Allow CORS for local testing if the frontend is served from a different origin
-    @CrossOrigin(origins = "http://192.168.1.110:19000") // Replace with your frontend's IP and port // Adjust this in production for security
+    @CrossOrigin(origins = "http://192.168.3.189:8080") // Replace with your frontend's IP and port // Adjust this in production for security
     @PostMapping("/ping")
     public ResponseEntity<String> ping() {
         return ResponseEntity.ok("Pong");

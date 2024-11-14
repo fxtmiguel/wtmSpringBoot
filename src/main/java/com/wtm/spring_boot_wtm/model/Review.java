@@ -1,16 +1,30 @@
 package com.wtm.spring_boot_wtm.model;
 
+import jakarta.persistence.*;
+
+@Entity
+@Table(name="reviews")
+
 public class Review {
+
+    /*
+    * Need to connect to the front end
+    * Need a bar ID for the review that the bar is for
+    * Need a user ID for the posting of review
+    * Can get rid of the char count because it is not needed anymore (done)
+    */
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String reviewText;
-    private int charCount;
 
     // Constructors, Getters, and Setters
     public Review() {}
 
-    public Review(String reviewText, int charCount) {
+    public Review(String reviewText) {
         this.reviewText = reviewText;
-        this.charCount = charCount;
     }
 
     public Long getId() {
@@ -29,11 +43,5 @@ public class Review {
         this.reviewText = reviewText;
     }
 
-    public int getCharCount() {
-        return charCount;
-    }
-
-    public void setCharCount(int charCount) {
-        this.charCount = charCount;
-    }
 }
+

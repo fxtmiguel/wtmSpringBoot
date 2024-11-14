@@ -20,6 +20,10 @@ public class Review {
 
     private String reviewText;
 
+    public Long bar_id;
+
+    public Long user_id;
+
     // Constructors, Getters, and Setters
     public Review() {}
 

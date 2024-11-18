@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.wtm.spring_boot_wtm.model.Friends;
 import com.wtm.spring_boot_wtm.model.User;
 import com.wtm.spring_boot_wtm.service.FriendService;
+import com.wtm.spring_boot_wtm.service.UserService;
 
 @RestController
 @RequestMapping("api/friends")
@@ -22,6 +23,9 @@ public class FriendsController {
 
     @Autowired
     private FriendService service;
+    
+    @Autowired
+    private UserService userService;
 
     @PostMapping("/add")
     public ResponseEntity<?> addFriend(@RequestBody Map<String, String> request) {
@@ -37,4 +41,9 @@ public class FriendsController {
         return ResponseEntity.ok(friends);
     }
 
+    @GetMapping("/search")
+    public ResponseEntity<List<User>> searchUsers(@RequestParam String username) {
+        List<User> users = userService.searchUsers(username);
+        return ResponseEntity.ok(users);
+    }
 }

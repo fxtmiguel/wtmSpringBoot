@@ -17,7 +17,7 @@ public class UserController {
     private IUserService userService;
 
     // Register new user
-    @PostMapping
+    @PostMapping("/register")
     public ResponseEntity<?> saveUser(@RequestBody User user) {
         System.out.println(user.toString());
         if (userService.findByUsername(user.getUsername()) != null) {
@@ -43,9 +43,4 @@ public class UserController {
         }
     }
 
-    @PostMapping("/register")
-    public ResponseEntity<String> registerUser(@RequestBody User user) {
-        userService.saveUser(user);  // Implement saveUser in UserService
-        return new ResponseEntity<>("User registered successfully!", HttpStatus.CREATED);
-    }
 }

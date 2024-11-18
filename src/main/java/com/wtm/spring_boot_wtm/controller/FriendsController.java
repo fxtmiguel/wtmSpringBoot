@@ -32,9 +32,9 @@ public class FriendsController {
     }
     
     @GetMapping("/list")
-        public ResponseEntity<List<User>> listFriends(@RequestParam String username) {
-            List<User> friends = service.getFriends(username);
-            return ResponseEntity.ok(friends);
-        }
+    public ResponseEntity<List<User>> listFriends(@RequestParam String username) {
+        List<User> friends = service.getFriends(username);
+        return ResponseEntity.ok(friends);
+    }
 
 }

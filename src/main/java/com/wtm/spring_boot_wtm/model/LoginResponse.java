@@ -1,20 +1,20 @@
 package com.wtm.spring_boot_wtm.model;
 
 public class LoginResponse {
-    private Long userId;
+    private Long user_id;
     private String username;
     private String token;
 
     // Constructor
-    public LoginResponse(Long userId, String username) {
-        this.userId = userId;
+    public LoginResponse(Long user_id, String username) {
+        this.user_id = user_id;
         this.username = username;
         // this.token = token;
     }
 
     // Getters
     public Long getUserId() {
-        return userId;
+        return user_id;
     }
 
     public String getUsername() {
@@ -26,8 +26,8 @@ public class LoginResponse {
     }
 
     // Setters (if needed)
-    public void setUserId(Long userId) {
-        this.userId = userId;
+    public void setUserId(Long user_id) {
+        this.user_id = this.user_id;
     }
 
     public void setUsername(String username) {

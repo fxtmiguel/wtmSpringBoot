@@ -15,6 +15,11 @@ public class UserService implements IUserService {
     @Autowired
     private IUserRepository userRepository;
 
+   
+    public List<User> searchUsers(String username) {
+        return userRepository.searchByUsernameContaining(username);
+    }    
+
     @Override
     public User saveUser(User user) {
         user.setCreateTime(LocalDateTime.now());

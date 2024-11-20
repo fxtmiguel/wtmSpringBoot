@@ -17,6 +17,9 @@ public class Bar {
     @Column(name = "name") // Optional: For storing bar names
     private String name;
 
+    @Column(name = "busyness", nullable = false)
+    private int busyness; // Changed from String to int
+
     @Column(name = "created_at", updatable = false)
     private LocalDateTime createdAt = LocalDateTime.now();
 
@@ -43,6 +46,14 @@ public class Bar {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public int getBusyness() {
+        return busyness;
+    }
+
+    public void setBusyness(int busyness) {
+        this.busyness = busyness;
     }
 
     public LocalDateTime getCreatedAt() {

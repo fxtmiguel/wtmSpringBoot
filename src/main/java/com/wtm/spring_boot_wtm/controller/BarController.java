@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
+
 @RestController
 @RequestMapping("/bars")
 public class BarController {
@@ -60,7 +62,7 @@ public class BarController {
         return ResponseEntity.ok("Bar processed successfully");
     }
 
-    // New endpoint to update busyness
+    // Endpoint to update busyness
     @PutMapping("/{placeId}/busyness")
     public ResponseEntity<?> updateBusyness(@PathVariable String placeId, @RequestBody BusynessUpdateRequest request) {
         boolean success = barService.updateBusyness(placeId, String.valueOf(request.getBusyness()));
@@ -69,5 +71,14 @@ public class BarController {
         } else {
             return ResponseEntity.badRequest().body("Failed to update busyness");
         }
+    }
+
+    // New endpoint to get the busyness of a specific bar
+    @GetMapping("/{placeId}/busyness")
+    public ResponseEntity<?> getBusyness(@PathVariable String placeId) {
+        Optional<Integer> busyness = barService.getBusynessByPlaceId(placeId);
+        return busyness
+                .map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.badRequest().body(-1));
     }
 }

@@ -38,4 +38,10 @@ public class BarService {
 
         return false; // If the bar with the specified placeId doesn't exist
     }
+
+    // New method to get busyness by placeId
+    public Optional<Integer> getBusynessByPlaceId(String placeId) {
+        Optional<Bar> optionalBar = barRepository.findByPlaceId(placeId);
+        return optionalBar.map(Bar::getBusyness); // Return the busyness value if the bar exists
+    }
 }

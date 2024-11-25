@@ -1,9 +1,12 @@
 package com.wtm.spring_boot_wtm.model;
 
 import jakarta.persistence.*;
+import lombok.Data;
+
 import java.time.LocalDateTime;
 
 @Entity
+@Data
 @Table(name = "bars")
 public class Bar {
 

@@ -8,10 +8,9 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/bars")
 public class BarController {
-
+    @Autowired
     private final BarService barService;
 
-    @Autowired
     public BarController(BarService barService) {
         this.barService = barService;
     }

@@ -7,10 +7,10 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class BarService {
-
+    
+    @Autowired
     private final BarRepository barRepository;
 
-    @Autowired
     public BarService(BarRepository barRepository) {
         this.barRepository = barRepository;
     }
@@ -19,7 +19,7 @@ public class BarService {
         if (!barRepository.existsByPlaceId(placeId)) {
             Bar bar = new Bar();
             bar.setPlaceId(placeId);
-            bar.setName(name); // Optional
+            bar.setName(name);
             barRepository.save(bar);
         }
     }

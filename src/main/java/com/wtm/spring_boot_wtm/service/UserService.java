@@ -12,8 +12,12 @@ import com.wtm.spring_boot_wtm.model.User;
 @Service
 public class UserService implements IUserService {
 
-    @Autowired
-    private IUserRepository userRepository;
+    private final IUserRepository userRepository;
+
+
+    public UserService(IUserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
    
     public List<User> searchUsers(String username) {

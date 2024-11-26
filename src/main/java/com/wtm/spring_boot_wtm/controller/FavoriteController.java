@@ -5,8 +5,6 @@ import com.wtm.spring_boot_wtm.model.FavoriteRequest;
 import com.wtm.spring_boot_wtm.repository.BarRepository;
 import com.wtm.spring_boot_wtm.repository.IFavoriteRepository;
 import com.wtm.spring_boot_wtm.service.FavoriteService;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,18 +16,20 @@ import java.util.Optional;
 @RequestMapping("/api/favorites")
 public class FavoriteController {
 
-
-    @Autowired
     private IFavoriteRepository favoritesRepository;
 
-    @Autowired
     private BarRepository barsRepository;
 
-    @Autowired
     private FavoriteService favoriteService;  
 
+    public FavoriteController(FavoriteService favoriteService, BarRepository barsRepository, IFavoriteRepository favoritesRepository){
+        this.favoriteService = favoriteService;
+        this.barsRepository = barsRepository;
+        this.favoritesRepository = favoritesRepository;
+    }
+
     @PostMapping("/add")
-    public ResponseEntity<?> addFavorite(@RequestBody FavoriteRequest request) {
+    public ResponseEntity<String> addFavorite(@RequestBody FavoriteRequest request) {
         Optional<Bar> optionalBar = barsRepository.findByPlaceId(request.getPlaceId());
 
         if (optionalBar.isEmpty()) {

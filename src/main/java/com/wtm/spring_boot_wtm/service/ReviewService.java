@@ -2,18 +2,21 @@ package com.wtm.spring_boot_wtm.service;
 
 import com.wtm.spring_boot_wtm.model.Review;
 import com.wtm.spring_boot_wtm.repository.IReviewRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Service
 public class ReviewService implements IReviewService {
 
-    @Autowired
     private IReviewRepository reviewRepository;
+
+    ReviewService(IReviewRepository reviewRepository) {
+        this.reviewRepository = reviewRepository;
+    }
 
     // Save a review
     @Override
@@ -48,7 +51,7 @@ public class ReviewService implements IReviewService {
         if (review.isPresent()) {
             reviewRepository.deleteById(reviewId);
         } else {
-            throw new RuntimeException("Review with id " + reviewId + " not found.");
+            throw new NoSuchElementException("Review with id " + reviewId + " not found.");
         }
     }
 }

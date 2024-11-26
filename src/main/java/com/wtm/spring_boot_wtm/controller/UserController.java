@@ -4,7 +4,6 @@ import com.wtm.spring_boot_wtm.model.User;
 import com.wtm.spring_boot_wtm.model.ResponseMessage;
 import com.wtm.spring_boot_wtm.model.LoginResponse;
 import com.wtm.spring_boot_wtm.service.IUserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,10 +12,12 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("api/user")
 public class UserController {
 
-    @Autowired
     private IUserService userService;
 
-    // Register new user
+    UserController(IUserService userService) {
+        this.userService = userService;
+    }
+
     @PostMapping("/register")
     public ResponseEntity<?> saveUser(@RequestBody User user) {
         System.out.println(user.toString());
@@ -26,7 +27,7 @@ public class UserController {
         return new ResponseEntity<>(userService.saveUser(user), HttpStatus.CREATED); // User saved
     }
 
-    // Login
+    
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody User user) {
         User existingUser = userService.findByUsername(user.getUsername());

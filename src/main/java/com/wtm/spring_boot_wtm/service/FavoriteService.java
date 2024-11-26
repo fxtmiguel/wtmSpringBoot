@@ -20,13 +20,6 @@ public class FavoriteService {
 
         favoriteRepository.save(favorite);
     }
-
-    public void removeFavorite(String userId, Long barsId) {
-        Favorite favorite = favoriteRepository.findByUserIdAndBarsId(userId, barsId)
-                .orElseThrow(() -> new IllegalArgumentException("Favorite not found"));
-    
-        favoriteRepository.delete(favorite);
-    }
     
     public List<Long> getFavoriteBarsIdsByUser(String userId) {
         return favoriteRepository.findByUserId(userId).stream()

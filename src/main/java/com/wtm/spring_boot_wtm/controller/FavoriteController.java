@@ -49,17 +49,6 @@ public class FavoriteController {
         return ResponseEntity.ok("Favorite added successfully");
     }
     
-
-    // @DeleteMapping
-    // public ResponseEntity<Void> removeFavorite(@RequestParam String userId, @RequestParam String placeId) {
-    //     try {
-    //         favoriteService.removeFavorite(userId, placeId);
-    //         return ResponseEntity.noContent().build();
-    //     } catch (IllegalArgumentException e) {
-    //         return ResponseEntity.badRequest().build();
-    //     }
-    // }
-
     @GetMapping("/list")
     public ResponseEntity<List<Long>> listFavorites(@RequestParam String userId) {
         List<Long> favorites = favoriteService.getFavoriteBarsIdsByUser(userId);

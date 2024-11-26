@@ -21,14 +21,13 @@ public class FriendsController {
     private final FriendService service;
     private final UserService userService;
 
-    // Constructor injection
     public FriendsController(FriendService service, UserService userService) {
         this.service = service;
         this.userService = userService;
     }
 
     @PostMapping("/add")
-    public ResponseEntity<?> addFriend(@RequestBody Map<String, String> request) {
+    public ResponseEntity<Object> addFriend(@RequestBody Map<String, String> request) {
         String username = request.get("username");
         String friendUsername = request.get("friendUsername");
         Friends friendship = service.addFriend(username, friendUsername);

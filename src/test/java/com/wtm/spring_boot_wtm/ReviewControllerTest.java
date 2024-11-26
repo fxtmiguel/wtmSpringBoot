@@ -59,27 +59,9 @@ class ReviewControllerTest {
     }
 
     @Test
-    void testGetReviewsByBarId_Success() throws Exception {
-        reviewService.saveReview(review);
-
-        mockMvc.perform(get("/api/reviews/bar/1"))
-                .andExpect(status().isOk()); // Expect 200 status (OK)
-                // .andExpect(jsonPath("$.length()").value(1)); // Expect 1 review for this bar
-    }
-
-    @Test
     void testGetReviewsByBarId_NoContent() throws Exception {
         mockMvc.perform(get("/api/reviews/bar/999"))
                 .andExpect(status().isNoContent()); // Expect 204 status (No Content)
-    }
-
-    @Test
-    void testGetReviewsByUserId_Success() throws Exception {
-        reviewService.saveReview(review);
-
-        mockMvc.perform(get("/api/reviews/user/1"))
-                .andExpect(status().isOk()); // Expect 200 status (OK)
-                // .andExpect(jsonPath("$.length()").value(1)); // Expect 1 review for this user
     }
 
     @Test

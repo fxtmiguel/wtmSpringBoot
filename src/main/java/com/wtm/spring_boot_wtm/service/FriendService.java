@@ -15,12 +15,9 @@ import com.wtm.spring_boot_wtm.repository.IUserRepository;
 @Service
 public class FriendService {
 
-    @Autowired
-    private IUserRepository userRepository;
-
+    private final IUserRepository userRepository;
     private final IFriendsRepository friendshipRepository;
 
-    // Constructor injection
     public FriendService(IUserRepository userRepository, IFriendsRepository friendshipRepository) {
         this.userRepository = userRepository;
         this.friendshipRepository = friendshipRepository;

@@ -42,9 +42,9 @@ public class FriendService {
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
         return friendshipRepository.findByUser(user)
-                                   .stream()
-                                   .map(Friends::getFriend)
-                                   .collect(Collectors.toList());
+                .stream()
+                .map(Friends::getFriend)
+                .toList(); // Uses Stream.toList() for immutability
     }
 
 }

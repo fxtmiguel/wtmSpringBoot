@@ -2,7 +2,6 @@ package com.wtm.spring_boot_wtm.service;
 
 import com.wtm.spring_boot_wtm.model.Bar;
 import com.wtm.spring_boot_wtm.repository.BarRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -10,7 +9,6 @@ import java.util.Optional;
 @Service
 public class BarService {
     
-    @Autowired
     private final BarRepository barRepository;
 
     public BarService(BarRepository barRepository) {

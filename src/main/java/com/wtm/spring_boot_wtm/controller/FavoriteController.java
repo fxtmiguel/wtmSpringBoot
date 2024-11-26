@@ -5,11 +5,13 @@ import com.wtm.spring_boot_wtm.model.FavoriteRequest;
 import com.wtm.spring_boot_wtm.repository.BarRepository;
 import com.wtm.spring_boot_wtm.repository.IFavoriteRepository;
 import com.wtm.spring_boot_wtm.service.FavoriteService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
+import java.util.Optional;
 
 
 @RestController
@@ -28,16 +30,17 @@ public class FavoriteController {
 
     @PostMapping("/add")
     public ResponseEntity<?> addFavorite(@RequestBody FavoriteRequest request) {
-        Bar bar = barsRepository.findByPlaceId(request.getPlaceId());
-        if (bar == null) {
+        Optional<Bar> optionalBar = barsRepository.findByPlaceId(request.getPlaceId());
+
+        if (optionalBar.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Bar not found");
         }
-        //Check for past favorites
+    
+        Bar bar = optionalBar.get();
         if (favoritesRepository.existsByUserIdAndBarsId(request.getUserId(), bar.getId())) {
             return ResponseEntity.status(HttpStatus.CONFLICT).body("Favorite already exists");
         }
     
-        //Create Favorite
         Favorite favorite = new Favorite();
         favorite.setUserId(request.getUserId());
         favorite.setBarsId(bar.getId());

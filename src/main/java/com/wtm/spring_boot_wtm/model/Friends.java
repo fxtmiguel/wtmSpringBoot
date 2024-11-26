@@ -27,10 +27,10 @@ public class Friends {
     private User friend;
 
     @Column(name = "created_at")
-    private LocalDateTime created_at;
+    private LocalDateTime createdat;
     
-    public void setCreateTime(LocalDateTime created_at) {
-        this.created_at = created_at;
+    public void setCreateTime(LocalDateTime createdat) {
+        this.createdat = createdat;
     }
 
     

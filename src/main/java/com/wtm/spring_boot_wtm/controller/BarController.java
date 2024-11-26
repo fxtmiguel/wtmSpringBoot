@@ -1,7 +1,6 @@
 package com.wtm.spring_boot_wtm.controller;
 
 import com.wtm.spring_boot_wtm.service.BarService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,7 +9,6 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/bars")
 public class BarController {
-    @Autowired
     private final BarService barService;
 
     public BarController(BarService barService) {
@@ -56,14 +54,14 @@ public class BarController {
 
     // Endpoint to add a bar
     @PostMapping
-    public ResponseEntity<?> addBar(@RequestBody BarRequest barRequest) {
+    public ResponseEntity<String> addBar(@RequestBody BarRequest barRequest) {
         barService.addBarIfNotExists(barRequest.getPlaceId(), barRequest.getName());
         return ResponseEntity.ok("Bar processed successfully");
     }
 
     // Endpoint to update busyness
     @PutMapping("/{placeId}/busyness")
-    public ResponseEntity<?> updateBusyness(@PathVariable String placeId, @RequestBody BusynessUpdateRequest request) {
+    public ResponseEntity<String> updateBusyness(@PathVariable String placeId, @RequestBody BusynessUpdateRequest request) {
         boolean success = barService.updateBusyness(placeId, String.valueOf(request.getBusyness()));
         if (success) {
             return ResponseEntity.ok("Busyness updated successfully");
@@ -74,7 +72,7 @@ public class BarController {
 
     // New endpoint to get the busyness of a specific bar
     @GetMapping("/{placeId}/busyness")
-    public ResponseEntity<?> getBusyness(@PathVariable String placeId) {
+    public ResponseEntity<Integer> getBusyness(@PathVariable String placeId) {
         Optional<Integer> busyness = barService.getBusynessByPlaceId(placeId);
         return busyness
                 .map(ResponseEntity::ok)

@@ -19,7 +19,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @ExtendWith(SpringExtension.class)
 @AutoConfigureMockMvc
-public class ReviewControllerTest {
+class ReviewControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
@@ -36,7 +36,7 @@ public class ReviewControllerTest {
     }
 
     @Test
-    public void testSubmitReview_Success() throws Exception {
+    void testSubmitReview_Success() throws Exception {
         // Submit a new review
         mockMvc.perform(post("/api/reviews")
                         .contentType("application/json")
@@ -45,18 +45,8 @@ public class ReviewControllerTest {
                 .andExpect(content().string("Review submitted successfully"));
     }
 
-//    @Test
-//    public void testSubmitReview_Failure() throws Exception {
-//        // Submit an invalid review (empty text for example)
-//        mockMvc.perform(post("/api/reviews")
-//                        .contentType("application/json")
-//                        .content("{\"reviewText\":\"\", \"barId\":1, \"userId\":1}"))
-//                // .andExpect(status().isBadRequest()) // Expect 400 status (Bad Request)
-//                .andExpect(content().string("Failed to submit review: Review text cannot be empty"));
-//    }
-
     @Test
-    public void testGetAllReviews_Success() throws Exception {
+    void testGetAllReviews_Success() throws Exception {
         // Save the review first
         reviewService.saveReview(review);
 
@@ -67,13 +57,13 @@ public class ReviewControllerTest {
     }
 
     @Test
-    public void testGetAllReviews_NoContent() throws Exception {
+    void testGetAllReviews_NoContent() throws Exception {
         mockMvc.perform(get("/api/reviews"))
                 .andExpect(status().isOk()); // Expect 200 status (No Content)
     }
 
     @Test
-    public void testGetReviewsByBarId_Success() throws Exception {
+    void testGetReviewsByBarId_Success() throws Exception {
         reviewService.saveReview(review);
 
         mockMvc.perform(get("/api/reviews/bar/1"))
@@ -82,13 +72,13 @@ public class ReviewControllerTest {
     }
 
     @Test
-    public void testGetReviewsByBarId_NoContent() throws Exception {
+    void testGetReviewsByBarId_NoContent() throws Exception {
         mockMvc.perform(get("/api/reviews/bar/999"))
                 .andExpect(status().isNoContent()); // Expect 204 status (No Content)
     }
 
     @Test
-    public void testGetReviewsByUserId_Success() throws Exception {
+    void testGetReviewsByUserId_Success() throws Exception {
         reviewService.saveReview(review);
 
         mockMvc.perform(get("/api/reviews/user/1"))
@@ -97,13 +87,13 @@ public class ReviewControllerTest {
     }
 
     @Test
-    public void testGetReviewsByUserId_NoContent() throws Exception {
+    void testGetReviewsByUserId_NoContent() throws Exception {
         mockMvc.perform(get("/api/reviews/user/999"))
                 .andExpect(status().isNoContent()); // Expect 204 status (No Content)
     }
 
     @Test
-    public void testGetReviewsByUserId_InvalidUserId() throws Exception {
+    void testGetReviewsByUserId_InvalidUserId() throws Exception {
         mockMvc.perform(get("/api/reviews/user/abc"))
                 .andExpect(status().isNoContent()); // Expect 204 status (No Content)
     }

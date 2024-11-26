@@ -2,8 +2,6 @@ package com.wtm.spring_boot_wtm.controller;
 
 import java.util.List;
 import java.util.Map;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,11 +19,14 @@ import com.wtm.spring_boot_wtm.service.UserService;
 @RequestMapping("api/friends")
 public class FriendsController {
 
-    @Autowired
-    private FriendService service;
-    
-    @Autowired
-    private UserService userService;
+    private final FriendService service;
+    private final UserService userService;
+
+    // Constructor injection
+    public FriendsController(FriendService service, UserService userService) {
+        this.service = service;
+        this.userService = userService;
+    }
 
     @PostMapping("/add")
     public ResponseEntity<?> addFriend(@RequestBody Map<String, String> request) {

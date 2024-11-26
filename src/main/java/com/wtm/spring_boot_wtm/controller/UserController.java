@@ -19,8 +19,7 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<?> saveUser(@RequestBody User user) {
-        System.out.println(user.toString());
+    public ResponseEntity<User> saveUser(@RequestBody User user) {
         if (userService.findByUsername(user.getUsername()) != null) {
             return new ResponseEntity<>(HttpStatus.CONFLICT); // Username already exists
         }
@@ -29,7 +28,7 @@ public class UserController {
 
     
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody User user) {
+    public ResponseEntity<Object> login(@RequestBody User user) {
         User existingUser = userService.findByUsername(user.getUsername());
         if (existingUser == null) {
             return new ResponseEntity<>(new ResponseMessage("User not found"), HttpStatus.NOT_FOUND);

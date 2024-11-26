@@ -2,7 +2,6 @@ package com.wtm.spring_boot_wtm.controller;
 
 import com.wtm.spring_boot_wtm.model.Review;
 import com.wtm.spring_boot_wtm.service.IReviewService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,8 +12,11 @@ import java.util.List;
 @RequestMapping("/api/reviews")
 public class ReviewController {
 
-    @Autowired
-    private IReviewService reviewService;
+    private final IReviewService reviewService;
+
+    public ReviewController(IReviewService reviewService) {
+        this.reviewService = reviewService;
+    }
 
     // Submit a new review
     @PostMapping

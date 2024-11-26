@@ -16,7 +16,7 @@ public class BarController {
     }
 
     // DTO for request payload to add a bar
-    static class BarRequest {
+    public static class BarRequest {
         private String placeId;
         private String name;
 
@@ -39,7 +39,7 @@ public class BarController {
     }
 
     // DTO for the busyness update request payload
-    static class BusynessUpdateRequest {
+    public static class BusynessUpdateRequest {
         private int busyness;
 
         // Getters and Setters

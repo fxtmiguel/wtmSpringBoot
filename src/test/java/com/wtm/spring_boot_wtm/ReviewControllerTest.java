@@ -6,21 +6,14 @@ import com.wtm.spring_boot_wtm.model.Review;
 import com.wtm.spring_boot_wtm.service.IReviewService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @SpringBootTest
-@ExtendWith(SpringExtension.class)
 @AutoConfigureMockMvc
 public class ReviewControllerTest {
 
@@ -47,16 +40,6 @@ public class ReviewControllerTest {
                 .andExpect(status().isCreated()) // Expect 201 status (Created)
                 .andExpect(content().string("Review submitted successfully"));
     }
-
-//    @Test
-//    public void testSubmitReview_Failure() throws Exception {
-//        // Submit an invalid review (empty text for example)
-//        mockMvc.perform(post("/api/reviews")
-//                        .contentType("application/json")
-//                        .content("{\"reviewText\":\"\", \"barId\":1, \"userId\":1}"))
-//                // .andExpect(status().isBadRequest()) // Expect 400 status (Bad Request)
-//                .andExpect(content().string("Failed to submit review: Review text cannot be empty"));
-//    }
 
     @Test
     public void testGetAllReviews_Success() throws Exception {

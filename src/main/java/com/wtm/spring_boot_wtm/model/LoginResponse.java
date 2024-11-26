@@ -27,7 +27,7 @@ public class LoginResponse {
 
     // Setters (if needed)
     public void setUserId(Long user_id) {
-        this.user_id = this.user_id;
+        this.user_id = user_id;
     }
 
     public void setUsername(String username) {

@@ -8,5 +8,6 @@ import java.util.Optional;
 public interface BarRepository extends JpaRepository<Bar, Long> {
     boolean existsByPlaceId(String placeId);
 
-    Optional<Bar> findByPlaceId(String placeId); // Added method for retrieving a bar by its placeId
+    
+    Optional<Bar> findByPlaceId(String placeId); 
 }

@@ -14,11 +14,17 @@ import com.wtm.spring_boot_wtm.repository.IUserRepository;
 
 @Service
 public class FriendService {
+
     @Autowired
     private IUserRepository userRepository;
 
-    @Autowired
-    private IFriendsRepository friendshipRepository;
+    private final IFriendsRepository friendshipRepository;
+
+    // Constructor injection
+    public FriendService(IUserRepository userRepository, IFriendsRepository friendshipRepository) {
+        this.userRepository = userRepository;
+        this.friendshipRepository = friendshipRepository;
+    }
 
     public Friends addFriend(String username, String friendUsername) {
         User user = userRepository.findByUsername(username)

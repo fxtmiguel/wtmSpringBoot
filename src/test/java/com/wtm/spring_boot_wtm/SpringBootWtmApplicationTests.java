@@ -8,6 +8,9 @@ class SpringBootWtmApplicationTests {
 
 	@Test
 	void contextLoads() {
+
+		// keep this empty because Maven uses it
+
 	}
 
 }

@@ -54,6 +54,5 @@ class FriendsControllerTest {
         ResponseEntity<User[]> response = restTemplate.getForEntity(url, User[].class);
 
         assertEquals(HttpStatus.OK, response.getStatusCode());
-        // assert response.getBody() != null;
     }
 }
